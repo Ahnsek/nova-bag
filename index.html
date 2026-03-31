@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA BAG • Smart Traveler Backpack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --orange: #ff6200;
+        }
+        
+        * {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #ffffff 0%, #fffaf0 100%);
+        }
+        
+        .nav-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover {
+            color: #ff6200;
+            transform: translateY(-1px);
+        }
+        
+        .phone-frame {
+            border: 12px solid #111827;
+            border-radius: 48px;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            overflow: hidden;
+            background: white;
+        }
+        
+        .feature-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 25px 25px 0 -10px #ff6200;
+        }
+        
+        .prototype-img {
+            transition: all 0.3s ease;
+        }
+        
+        .prototype-img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* CHECKOUT MODAL */
+        .modal {
+            animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes modalPop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .success-confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confetti-fall 3s linear forwards;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-lg border-b border-gray-100 z-50">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="px-8 py-5 flex items-center justify-between">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-[#ff6200] rounded-2xl flex items-center justify-center text-white font-bold text-2xl leading-none pt-0.5">N</div>
+                    <h1 class="text-2xl font-semibold tracking-tighter">NOVA BAG</h1>
+                </div>
+
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#app" class="nav-link">The App</a>
+                    <a href="#prototype" class="nav-link">Prototypes</a>
+                    <a href="#solve" class="nav-link">Why Nova</a>
+                    <a onclick="openCheckout()" class="nav-link cursor-pointer">Shop</a>
+                </div>
+
+                <div class="flex items-center gap-x-4">
+                    <button onclick="toggleDarkMode()" class="w-9 h-9 flex items-center justify-center rounded-2xl hover:bg-gray-100 transition-colors">
+                        <i class="fa-solid fa-moon text-xl"></i>
+                    </button>
+                    
+                    <button onclick="openCheckout()" 
+                            class="px-6 py-3 bg-[#ff6200] hover:bg-orange-600 text-white font-semibold rounded-3xl flex items-center gap-x-2 transition-all">
+                        <i class="fa-solid fa-shopping-bag"></i>
+                        BUY NOW • RM 549
+                    </button>
+
+                    <button onclick="toggleMobileMenu()" class="md:hidden w-11 h-11 flex items-center justify-center text-2xl">
+                        <i id="hamburger-icon" class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden px-8 pb-8 bg-white border-t">
+                <div class="flex flex-col gap-y-4 text-sm font-medium">
+                    <a href="#features" onclick="toggleMobileMenu()" class="py-3">Features</a>
+                    <a href="#app" onclick="toggleMobileMenu()" class="py-3">The App</a>
+                    <a href="#prototype" onclick="toggleMobileMenu()" class="py-3">Prototypes</a>
+                    <a href="#solve" onclick="toggleMobileMenu()" class="py-3">Why Nova</a>
+                    <button onclick="toggleMobileMenu();openCheckout()" class="py-3 text-left">Shop Now</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO + other sections remain exactly the same as before (omitted for brevity) -->
+    <!-- ... (all previous sections are unchanged) ... -->
+
+    <!-- SHOP SECTION (updated) -->
+    <section id="shop" class="py-20 bg-[#ff6200] text-white">
+        <div class="max-w-screen-2xl mx-auto px-8 text-center">
+            <div class="max-w-md mx-auto">
+                <h2 class="text-6xl font-semibold tracking-tighter">Ready to travel smarter?</h2>
+                <p class="mt-6 text-2xl">Limited first batch available now.</p>
+                
+                <div class="mt-12 bg-white/10 backdrop-blur-lg rounded-3xl p-8">
+                    <div class="flex justify-between items-baseline">
+                        <div>
+                            <span class="text-6xl font-semibold">RM 549</span>
+                            <span class="text-xl ml-3 line-through opacity-60">RM 699</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="px-4 py-1 bg-white text-black text-sm font-medium rounded-3xl">Free shipping • Malaysia only</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="openCheckout()" 
+                            class="mt-8 w-full py-6 text-xl font-semibold bg-white text-[#ff6200] rounded-3xl hover:scale-105 transition-transform">
+                        ADD TO CART • ONLY 47 LEFT
+                    </button>
+                </div>
+                
+                <p class="text-sm mt-8 opacity-75">Ships in 7–10 days • 2-year warranty • 30-day money-back</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHECKOUT MODAL (NEW – this fixes the blank issue) -->
+    <div id="checkout-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+        <div class="modal bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-hidden shadow-2xl">
+            
+            <!-- Modal Header -->
+            <div class="px-8 pt-6 pb-4 border-b flex items-center justify-between">
+                <h2 class="text-2xl font-semibold">Checkout</h2>
+                <button onclick="closeCheckout()" class="text-3xl leading-none text-gray-400 hover:text-gray-900">×</button>
+            </div>
+
+            <div id="modal-content">
+                <!-- Step 1: Order Summary -->
+                <div class="p-8">
+                    <div class="flex gap-4">
+                        <img src="https://picsum.photos/id/1015/120/120" alt="Nova Bag" class="w-24 h-24 object-cover rounded-2xl">
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-xl">NOVA BAG – Smart Traveler Backpack</h3>
+                            <p class="text-sm text-gray-500">Weatherproof • GPS • Biometric Lock</p>
+                            <div class="flex justify-between mt-4">
+                                <div class="flex items-center border rounded-2xl">
+                                    <button onclick="changeQuantity(-1)" class="px-4 py-2 text-xl font-medium">-</button>
+                                    <span id="quantity" class="px-6 font-semibold">1</span>
+                                    <button onclick="changeQuantity(1)" class="px-4 py-2 text-xl font-medium">+</button>
+                                </div>
+                                <div class="text-right">
+                                    <span id="total-price" class="text-3xl font-semibold">RM 549</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simple Form -->
+                    <div class="mt-10 space-y-6">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-500 mb-1">FULL NAME</label>
+                            <input id="name" type="text" value="Muhammad Farhan" 
+                                   class="w-full border border-gray-200 rounded-2xl px-5 py-4 focus:outline-none focus:border-[#ff6200]">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">EMAIL</label>
+                                <input id="email" type="email" value="farhan.group5@intraprenuer.com" 
+                                       class="w-full border border-gray-200 rounded-2xl px-5 py-4 focus:outline-none focus:border-[#ff6200]">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">PHONE</label>
+                                <input type="tel" value="+60 12-345 6789" 
+                                       class="w-full border border-gray-200 rounded-2xl px-5 py-4 focus:outline-none focus:border-[#ff6200]">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-500 mb-1">SHIPPING ADDRESS</label>
+                            <textarea id="address" rows="2" class="w-full border border-gray-200 rounded-3xl px-5 py-4 focus:outline-none focus:border-[#ff6200]">Kolej Mawar, Universiti Malaya, 50603 Kuala Lumpur</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Fake Payment -->
+                    <div class="mt-8">
+                        <p class="text-xs font-medium text-gray-500 mb-3">PAYMENT METHOD</p>
+                        <div class="flex gap-3">
+                            <div onclick="selectPayment(this)" class="payment-option flex-1 border-2 border-[#ff6200] rounded-2xl p-4 text-center cursor-pointer">
+                                <i class="fa-brands fa-cc-visa text-3xl"></i>
+                                <p class="text-sm font-medium mt-2">Card</p>
+                            </div>
+                            <div onclick="selectPayment(this)" class="payment-option flex-1 border border-gray-200 hover:border-gray-300 rounded-2xl p-4 text-center cursor-pointer">
+                                <i class="fa-brands fa-paypal text-3xl"></i>
+                                <p class="text-sm font-medium mt-2">PayPal</p>
+                            </div>
+                            <div onclick="selectPayment(this)" class="payment-option flex-1 border border-gray-200 hover:border-gray-300 rounded-2xl p-4 text-center cursor-pointer">
+                                <i class="fa-solid fa-qrcode text-3xl"></i>
+                                <p class="text-sm font-medium mt-2">Touch 'n Go</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer of modal -->
+                <div class="px-8 py-6 border-t flex items-center justify-between bg-gray-50">
+                    <div>
+                        <p class="text-xs text-gray-500">Total today</p>
+                        <p id="final-total" class="text-2xl font-semibold">RM 549</p>
+                    </div>
+                    <button onclick="placeOrder()" 
+                            class="px-10 py-5 bg-[#ff6200] text-white font-semibold rounded-3xl text-lg hover:scale-105 transition-transform">
+                        PLACE ORDER SECURELY
+                    </button>
+                </div>
+            </div>
+
+            <!-- SUCCESS SCREEN (hidden initially) -->
+            <div id="success-screen" class="hidden p-8 text-center">
+                <div id="confetti-container" class="relative h-40 mb-6"></div>
+                
+                <i class="fa-solid fa-check-circle text-8xl text-emerald-500 mb-6"></i>
+                <h2 class="text-4xl font-semibold">Order Confirmed!</h2>
+                <p class="text-gray-600 mt-3">Your NOVA BAG is being prepared.<br>Tracking will be sent to your email.</p>
+                
+                <div class="mt-8 bg-gray-100 rounded-3xl p-6 text-left text-sm">
+                    <div class="flex justify-between"><span>Order #NB-478291</span><span class="font-medium">RM 549</span></div>
+                    <div class="flex justify-between mt-3"><span>Estimated delivery</span><span class="font-medium">7–10 April 2026</span></div>
+                </div>
+                
+                <button onclick="closeCheckout()" 
+                        class="mt-8 w-full py-6 text-lg font-semibold border-2 border-gray-900 rounded-3xl">
+                    BACK TO HOMEPAGE
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER (same as before) -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-screen-2xl mx-auto px-8 grid md:grid-cols-4 gap-y-10">
+            <div>
+                <div class="flex items-center gap-x-3 mb-6">
+                    <div class="w-9 h-9 bg-white text-[#ff6200] rounded-2xl flex items-center justify-center font-bold text-3xl">N</div>
+                    <span class="text-2xl font-semibold">NOVA BAG</span>
+                </div>
+                <p class="text-gray-400 text-sm">Smart backpacks for backpackers & outdoor explorers.<br>Built in Malaysia.</p>
+            </div>
+            <div>
+                <div class="uppercase text-xs tracking-widest mb-4">Product</div>
+                <ul class="space-y-3 text-sm">
+                    <li>Features</li>
+                    <li>The App</li>
+                    <li>Technical Specs</li>
+                    <li>Compare</li>
+                </ul>
+            </div>
+            <div>
+                <div class="uppercase text-xs tracking-widest mb-4">Company</div>
+                <ul class="space-y-3 text-sm">
+                    <li>The Intrapreneurial Journey</li>
+                    <li>Our Story</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+            <div>
+                <div class="uppercase text-xs tracking-widest mb-4">Follow the journey</div>
+                <div class="flex gap-x-6 text-3xl">
+                    <i class="fa-brands fa-instagram hover:text-[#ff6200] cursor-pointer"></i>
+                    <i class="fa-brands fa-tiktok hover:text-[#ff6200] cursor-pointer"></i>
+                    <i class="fa-brands fa-threads hover:text-[#ff6200] cursor-pointer"></i>
+                </div>
+                <p class="text-xs text-gray-400 mt-10">© 2026 Group 5 • Module 4 Assessment</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ... (all previous scripts remain unchanged) ...
+
+        // NEW: Checkout functions
+        let quantity = 1;
+        const basePrice = 549;
+
+        function openCheckout() {
+            document.getElementById('checkout-modal').classList.remove('hidden');
+            document.getElementById('checkout-modal').classList.add('flex');
+            // Reset to summary screen
+            document.getElementById('modal-content').classList.remove('hidden');
+            document.getElementById('success-screen').classList.add('hidden');
+            updatePrice();
+        }
+
+        function closeCheckout() {
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function changeQuantity(change) {
+            quantity = Math.max(1, quantity + change);
+            document.getElementById('quantity').textContent = quantity;
+            updatePrice();
+        }
+
+        function updatePrice() {
+            const total = basePrice * quantity;
+            document.getElementById('total-price').textContent = `RM ${total}`;
+            document.getElementById('final-total').textContent = `RM ${total}`;
+        }
+
+        function selectPayment(el) {
+            document.querySelectorAll('.payment-option').forEach(e => e.classList.remove('border-[#ff6200]'));
+            el.classList.add('border-[#ff6200]');
+        }
+
+        function placeOrder() {
+            // Simulate processing
+            document.getElementById('modal-content').classList.add('hidden');
+            document.getElementById('success-screen').classList.remove('hidden');
+            
+            // Confetti animation
+            const container = document.getElementById('confetti-container');
+            container.innerHTML = '';
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'success-confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = ['#ff6200', '#10b981', '#3b82f6'][Math.floor(Math.random()*3)];
+                confetti.style.animationDuration = (Math.random() * 2.5 + 2) + 's';
+                confetti.style.transform = `rotate(${Math.random()*360}deg)`;
+                container.appendChild(confetti);
+                
+                // Remove after animation
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Existing functions (toggleMobileMenu, toggleDarkMode, app demo, etc.) remain the same
+        // ... (copy-paste your previous script functions here) ...
+
+        window.onload = () => {
+            console.log('%c🚀 NOVA BAG website ready! Checkout modal is now fully interactive.', 'background:#ff6200;color:white;padding:2px 6px;border-radius:4px;font-weight:600');
+            // Initialize previous scripts...
+        };
+    </script>
+</body>
+</html>
+Add index.html - Nova Bag website
